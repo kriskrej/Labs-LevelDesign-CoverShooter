@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour {
     [SerializeField] Bullet bulletPrefab;
     [SerializeField] Transform bulletSpawnPoint; 
     [SerializeField, Range(0,100)] float shootDistance = 20;
+    [SerializeField, Range(0.1f, 5f)] float secondsBetweenShoots = 0.5f;
     [SerializeField] float shootForce = 10;
 
     void Awake() {
@@ -15,10 +16,18 @@ public class EnemyController : MonoBehaviour {
     }
 
     IEnumerator ShootCoroutine() {
+        CreateContainerForBullets();
         while (true) {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(secondsBetweenShoots);
             if (IsPlayerCloseEnough())
                 Shoot();
+        }
+    }
+
+    static void CreateContainerForBullets() {
+        if (GameObject.Find("/Bullets") == null) {
+            var bulltes = Instantiate(new GameObject());
+            bulltes.transform.name = "Bullets";
         }
     }
 

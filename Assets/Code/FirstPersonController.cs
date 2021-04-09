@@ -5,8 +5,8 @@ public class FirstPersonController : MonoBehaviour {
     public float movementSpeed = 2;
     public float rotationSpeed = 2;
     public float jumpForce = 5;
-    CinemachineVirtualCamera camera;
-    Rigidbody rigidbody;
+    new CinemachineVirtualCamera camera;
+    new Rigidbody rigidbody;
 
     void Awake() {
         rigidbody = GetComponent<Rigidbody>();
